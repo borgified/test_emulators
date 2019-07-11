@@ -98,6 +98,9 @@ before_install:
     fi
     # use the absolute emulator path in case older version installed (on default path)
     $ANDROID_HOME/emulator/emulator -avd test -no-audio $EMU_PARAMS $EMU_ADDITIONAL_OPTIONS ${EMU_DEBUG} &
+
+install:
+  - curl -sL https://github.com/borgified/honeyvent/releases/download/v1.0.5/honeyvent --output /tmp/honeyvent && chmod u+x /tmp/honeyvent && sudo mv /tmp/honeyvent /usr/local/bin/
 before_script:
   # Wait for emulator to startup.
   - ./scripts/android-wait-for-emulator.sh
@@ -106,3 +109,9 @@ before_script:
 
 script:
   - echo "Done."
+
+after_success:
+  - honeyvent -k $HONEYCOMB_WRITEKEY -d $DATASET -n result -v success -n project -v test_android_emulators -n label -v "android-$SYS;$ABI"
+
+after_failure:
+  - honeyvent -k $HONEYCOMB_WRITEKEY -d $DATASET -n result -v failure -n project -v test_android_emulators -n label -v "android-$SYS;$ABI"
