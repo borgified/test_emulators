@@ -103,7 +103,7 @@ install:
   - curl -sL https://github.com/borgified/honeyvent/releases/download/v1.0.5/honeyvent --output /tmp/honeyvent && chmod u+x /tmp/honeyvent && sudo mv /tmp/honeyvent /usr/local/bin/
 before_script:
   # Wait for emulator to startup.
-  - DURATION=$(./scripts/android-wait-for-emulator.sh | grep "Emulator is ready" | tr -d: -f2)
+  - DURATION=$(./scripts/android-wait-for-emulator.sh)
   # unlock screen
 #  - adb shell input keyevent 82
 
