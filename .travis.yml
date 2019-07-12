@@ -100,7 +100,7 @@ before_install:
     $ANDROID_HOME/emulator/emulator -avd test -no-audio $EMU_PARAMS $EMU_ADDITIONAL_OPTIONS ${EMU_DEBUG} &
 
 install:
-  - curl -sL https://github.com/borgified/honeyvent/releases/download/v1.0.5/honeyvent --output /tmp/honeyvent && chmod u+x /tmp/honeyvent && sudo mv /tmp/honeyvent /usr/local/bin/
+  - curl -sL https://github.com/honeycombio/honeyvent/releases/download/v1.0.0/honeyvent-linux-amd64 --output /tmp/honeyvent && chmod u+x /tmp/honeyvent && sudo mv /tmp/honeyvent /usr/local/bin/
 before_script:
   # Wait for emulator to startup.
   - DURATION=$(./scripts/android-wait-for-emulator.sh)
